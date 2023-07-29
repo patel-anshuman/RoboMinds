@@ -11,11 +11,238 @@ interface InterviewType {
 }
 
 const interviewTypes: InterviewType[] = [
-  { value: "MERN", label: "MERN Stack" },
-  { value: "Node", label: "Node.js" },
-  { value: "Java", label: "Java" },
+  { value: "mern", label: "MERN" },
+  { value: "node", label: "NODE" },
+  { value: "java", label: "JAVA" },
   // Add more interview types here
 ];
+
+interface InterviewData {
+  job_title: string;
+  topics: string[];
+}
+
+const courseData: { [key: string]: InterviewData } = {
+  mern: {
+    job_title: "Frontend Software Developer",
+    topics: [
+      "UseEffect",
+      "Different ways of using useEffect",
+      "Routing revision",
+      "Private route",
+      "State Management",
+      "Different hooks for state management",
+      "useState",
+      "useReducer",
+      "useRef",
+      "Rules of hooks",
+      "Custom hooks",
+      "useDebounce hook",
+      "useThrottle hook",
+      "Generic or custom components",
+      "Creating a custom OTP/PIN component",
+      "MVC and Flux architecture",
+      "Why redux",
+      "Basic redux architecture",
+      "React Redux",
+      "useSelector",
+      "useDispatch",
+      "Using the store",
+      "using shallowEqual check",
+      "Using multiple reducers",
+      "Combinereducer",
+      "Scaling the existing application",
+      "Middleware",
+      "Redux thunk",
+      "Putting all logic part in action",
+      "Creating thunk from scratch",
+      "Redux dev tools",
+      "Styled components",
+      "Filtering",
+      "useSearchParams hook",
+      "useLocation hook",
+      "Persisting the data based on query params",
+      "Filtering",
+      "Adding multiple filters",
+      "Params object in axios",
+      "Edit functionality",
+      "Sorting",
+      "Edit functionality",
+      "Importance of optimization",
+      "useMemo",
+      "useCallback",
+      "memo",
+      "Visualizing optimization using profiler",
+      "What is TypeScript",
+      "Compiled and transpiled language",
+      "Static and dynamic language",
+      "Data types in TS",
+      "Object and Array in TS",
+      "Union and Intersection",
+      "Functions",
+      "Tuple, generic function, class, and interface",
+      "Creating a React project with TS",
+      "Creating a todo with react-ts",
+      "CRUD operations",
+      "What is testing?",
+      "TBD (Testing Based Development)",
+      "Why do we need to test our code?",
+      "React Testing Library",
+      "Folder structure and extension of test files",
+      "How to write test files?",
+      "render and get methods",
+      "expect method",
+      "What is Cypress?",
+      "How is it different from RTL?",
+      "Process of creating and running a basic cypress test",
+      "Learning how to create test cases using counter example",
+      "Testing application created by someone else using todo example (https://example.cypress.io/todo)",
+    ],
+  },
+  node: {
+    job_title: "Backend Software Developer",
+    topics: [
+      "UseEffect",
+      "Different ways of using useEffect",
+      "Routing revision",
+      "Private route",
+      "State Management",
+      "Different hooks for state management",
+      "useState",
+      "useReducer",
+      "useRef",
+      "Rules of hooks",
+      "Custom hooks",
+      "useDebounce hook",
+      "useThrottle hook",
+      "Generic or custom components",
+      "Creating a custom OTP/PIN component",
+      "MVC and Flux architecture",
+      "Why redux",
+      "Basic redux architecture",
+      "React Redux",
+      "useSelector",
+      "useDispatch",
+      "Using the store",
+      "using shallowEqual check",
+      "Using multiple reducers",
+      "Combinereducer",
+      "Scaling the existing application",
+      "Middleware",
+      "Redux thunk",
+      "Putting all logic part in action",
+      "Creating thunk from scratch",
+      "Redux dev tools",
+      "Styled components",
+      "Filtering",
+      "useSearchParams hook",
+      "useLocation hook",
+      "Persisting the data based on query params",
+      "Filtering",
+      "Adding multiple filters",
+      "Params object in axios",
+      "Edit functionality",
+      "Sorting",
+      "Edit functionality",
+      "Importance of optimization",
+      "useMemo",
+      "useCallback",
+      "memo",
+      "Visualizing optimization using profiler",
+      "What is TypeScript",
+      "Compiled and transpiled language",
+      "Static and dynamic language",
+      "Data types in TS",
+      "Object and Array in TS",
+      "Union and Intersection",
+      "Functions",
+      "Tuple, generic function, class, and interface",
+      "Creating a React project with TS",
+      "Creating a todo with react-ts",
+      "CRUD operations",
+      "What is testing?",
+      "TBD (Testing Based Development)",
+      "Why do we need to test our code?",
+      "React Testing Library",
+      "Folder structure and extension of test files",
+      "How to write test files?",
+      "render and get methods",
+      "expect method",
+      "What is Cypress?",
+      "How is it different from RTL?",
+      "Process of creating and running a basic cypress test",
+      "Learning how to create test cases using counter example",
+      "Testing application created by someone else using todo example (https://example.cypress.io/todo)",
+    ],
+  },
+  java: {
+    job_title: "Backend Software Developer",
+    topics: [
+      "Core Java",
+      "Object-Oriented Programming (OOP) concepts",
+      "Java Collections Framework",
+      "Exception Handling",
+      "Multithreading and Concurrency",
+      "Java I/O (Input/Output)",
+      "Generics",
+      "Lambda Expressions",
+      "Java Streams",
+      "Java Annotations",
+      "Java Reflection",
+      "Java Serialization",
+      "Java JDBC (Java Database Connectivity)",
+      "Spring Framework",
+      "Dependency Injection (DI) in Spring",
+      "Inversion of Control (IoC) in Spring",
+      "Spring Boot",
+      "Spring Boot Starter",
+      "Spring Boot Autoconfiguration",
+      "Spring Boot Actuator",
+      "Spring Boot Data JPA",
+      "Spring Boot RESTful Web Services",
+      "Spring Security",
+      "Spring Boot Testing",
+      "Spring Boot DevTools",
+      "Spring Boot Validation",
+      "Spring Boot Error Handling",
+      "Spring Boot Caching",
+      "Spring Boot Actuator",
+      "Spring Boot Profiles",
+      "Spring Boot Configuration Properties",
+      "Spring Boot Logging",
+      "Spring Boot Dockerization",
+      "Spring Boot Deployment",
+      "Spring Boot Integration with Frontend (e.g., React, Angular)",
+      "RESTful API Design Principles",
+      "API Documentation with Swagger",
+      "Spring Data MongoDB",
+      "Spring Data JPA",
+      "Spring Data Redis",
+      "Spring Cloud (Microservices with Spring Boot)",
+      "Spring Security",
+      "Spring AOP (Aspect-Oriented Programming)",
+      "Testing with JUnit and Mockito",
+      "Database Design and SQL",
+      "MySQL or PostgreSQL",
+      "NoSQL Databases (MongoDB, Redis)",
+      "Caching Strategies and Redis",
+      "HTTP and REST Concepts",
+      "JSON Web Tokens (JWT)",
+      "Version Control with Git",
+      "Build Tools (Maven, Gradle)",
+      "Deployment (Docker, Kubernetes)",
+      "Continuous Integration and Continuous Deployment (CI/CD)",
+      "Design Patterns (e.g., Singleton, Factory, MVC)",
+      "Performance Optimization and Monitoring",
+      "Security Best Practices in Java",
+      "Code Quality and Code Review",
+      "Software Design Principles (e.g., SOLID)",
+      "API Security and Authentication",
+    ],
+  },
+};
+
+
 
 const HomePage: React.FC = () => {
   const [selectedInterviewType, setSelectedInterviewType] =
@@ -25,42 +252,114 @@ const HomePage: React.FC = () => {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [interviewerResponse, setInterviewerResponse] = useState<string>("");
 
+  const API_URL = "https://api.openai.com/v1/chat/completions";
+  const API_KEY = "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";
+
   const handleStartInterview = async () => {
     if (!selectedInterviewType) return;
 
+    const prompt = `I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of ${ courseData[selectedInterviewType].job_title }.
+        
+    I want you to only reply as the interviewer. Do not write all the conservation at once. I want you to only do the technical interview with me on coding ( Topics : ${ courseData[selectedInterviewType].topics.join(", ") }) and data structures and algorithms ( Topics : Arrays, Strings, Stack, Queue, linked list ). Ask me the questions and wait for my answers. Start the interview now. Ask one question at a time, if I am not able to answer satisfactorily, give me feedback in this framework:
+    
+    ####
+    If it is a Data Structures and Algorithms or a coding technical question then
+    REACTO: 
+    R: Repeat (Repeating the question in your own word)
+    E: Examples (Give some examples to clear out the meaning) and edge cases
+    A: Approach (Discussing the approach to solve the question)
+    C: Code (Writing the code with proper indentation, commenting and proper coding format)
+    T: Testing the code (With some own test cases)
+    O: Optimise (Use optimisation to optimise the already present code)
+    ---
+    If it is a Conceptual question then
+    D: Definition
+    U: Use-case
+    B: Benefit
+    X: Extra Information
+    ---
+    #####
+    {<Ask me the questions individually like an interviewer and wait for my answers. Do not ask more than one question at a time >}
+    Questions can include both new questions and follow up questions from the previous questions. Continue the process until I ask you to stop.  And, you will stop the interview when I tell you to stop using the phrase “stop the interview”. After that, you would provide me feedback. 
+    
+    The cumulative feedback generated at the end should be evaluated using the following rubrics. While grading my responses you have to very strict like a real interviewer
+    1. Subject Matter Expertise
+    2. Communication skills
+    3. Problem Solving skills
+    4. Hiring criteria : Options are Reject, Waitlist, Hire and Strong Hire
+    5. Code Quality
+    Feedback for Subject Matter Expertise, Communication skills, Problem Solving skills should contain ratings on my interview responses from 0 - 10`;
+    
     try {
-      // Fetch initial set of questions for the selected interview type from the backend
-      const response = await axios.get(
-        `/api/questions?type=${selectedInterviewType}`
-      );
-      setQuestionList(response.data.questions);
+      // Fetch the response from the OpenAI API with the signal from AbortController
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: prompt }],
+        }),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+      setInterviewerResponse(data.choices[0].message.content)
     } catch (error) {
-      console.error("Error fetching questions:", error);
+      console.error("Error:", error);
+      setInterviewerResponse("Error occurred while generating.");
     }
   };
 
-  const handleNextQuestion = async () => {
-    if (currentQuestionIndex + 1 < questionList.length) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      // End of the interview
-      setCurrentQuestionIndex(0);
-      setQuestionList([]);
-      setUserAnswer("");
-      setInterviewerResponse("");
+  const handleStopInterview = async () => {
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: "stop the interview" }],
+        }),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+      
+      setInterviewerResponse(data.choices[0].message.content)
+    } catch (error) {
+      console.error("Error:", error);
+      setInterviewerResponse("Error occurred while generating.");
     }
   };
 
   const handleAnswerSubmission = async () => {
+    if (userAnswer=="") return;
     try {
-      // Send the user's answer to the backend for processing and receiving an interviewer response
-      const response = await axios.post("/api/submitAnswer", {
-        question: questionList[currentQuestionIndex],
-        answer: userAnswer,
+      // Fetch the response from the OpenAI API with the signal from AbortController
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: userAnswer }],
+        }),
       });
-      setInterviewerResponse(response.data.response);
+  
+      const data = await response.json();
+      console.log(data);
+      setInterviewerResponse(data.choices[0].message.content)
+      setUserAnswer("");
     } catch (error) {
-      console.error("Error submitting answer:", error);
+      console.error("Error:", error);
+      setInterviewerResponse("Error occurred while generating.");
     }
   };
 
@@ -107,9 +406,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* {questionList.length > 0 && ( */}
-
-      <div className="QandA">
+      {/* <div className="QandA">
         <h2>Question {currentQuestionIndex + 1}</h2>
         <p>{questionList[currentQuestionIndex]} questionList</p>
       </div>
@@ -117,6 +414,10 @@ const HomePage: React.FC = () => {
       <div className="feedback">
         <p>Feedback:</p>
         <p>{interviewerResponse}</p>
+      </div> */}
+
+      <div className="resultContainer">
+        <p>Interviewer: {interviewerResponse}</p>
       </div>
 
       <div
@@ -126,6 +427,7 @@ const HomePage: React.FC = () => {
         <div className="flex-grow">
           <textarea
             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            id="promptInput"
             rows={3}
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
@@ -138,14 +440,12 @@ const HomePage: React.FC = () => {
           Submit Answer
         </button>
         <button
-          onClick={handleNextQuestion}
+          onClick={handleStopInterview}
           className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          Next Question
+          Stop Interview
         </button>
       </div>
-
-      {/* )} */}
     </div>
   );
 };
