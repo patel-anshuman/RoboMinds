@@ -102,77 +102,22 @@ const courseData: { [key: string]: InterviewData } = {
   node: {
     job_title: "Backend Software Developer",
     topics: [
-      "UseEffect",
-      "Different ways of using useEffect",
-      "Routing revision",
-      "Private route",
-      "State Management",
-      "Different hooks for state management",
-      "useState",
-      "useReducer",
-      "useRef",
-      "Rules of hooks",
-      "Custom hooks",
-      "useDebounce hook",
-      "useThrottle hook",
-      "Generic or custom components",
-      "Creating a custom OTP/PIN component",
-      "MVC and Flux architecture",
-      "Why redux",
-      "Basic redux architecture",
-      "React Redux",
-      "useSelector",
-      "useDispatch",
-      "Using the store",
-      "using shallowEqual check",
-      "Using multiple reducers",
-      "Combinereducer",
-      "Scaling the existing application",
-      "Middleware",
-      "Redux thunk",
-      "Putting all logic part in action",
-      "Creating thunk from scratch",
-      "Redux dev tools",
-      "Styled components",
-      "Filtering",
-      "useSearchParams hook",
-      "useLocation hook",
-      "Persisting the data based on query params",
-      "Filtering",
-      "Adding multiple filters",
-      "Params object in axios",
-      "Edit functionality",
-      "Sorting",
-      "Edit functionality",
-      "Importance of optimization",
-      "useMemo",
-      "useCallback",
-      "memo",
-      "Visualizing optimization using profiler",
-      "What is TypeScript",
-      "Compiled and transpiled language",
-      "Static and dynamic language",
-      "Data types in TS",
-      "Object and Array in TS",
-      "Union and Intersection",
-      "Functions",
-      "Tuple, generic function, class, and interface",
-      "Creating a React project with TS",
-      "Creating a todo with react-ts",
-      "CRUD operations",
-      "What is testing?",
-      "TBD (Testing Based Development)",
-      "Why do we need to test our code?",
-      "React Testing Library",
-      "Folder structure and extension of test files",
-      "How to write test files?",
-      "render and get methods",
-      "expect method",
-      "What is Cypress?",
-      "How is it different from RTL?",
-      "Process of creating and running a basic cypress test",
-      "Learning how to create test cases using counter example",
-      "Testing application created by someone else using todo example (https://example.cypress.io/todo)",
+      "Nodejs Basics",
+      "JS",
+      "JWT",
+      "Mongoose and Mongodb",
+      "Express",
+      "Middlewares in Express",
+      "WebSockets",
+      "Basic of Caching with Redis",
+      "SQL",
+      "OOPs",
+      "SOLID",
+      "Arrays",
+      "Strings",
+      "Stack",
+      "Queue",
+      "Linked List",
     ],
   },
   java: {
@@ -242,8 +187,6 @@ const courseData: { [key: string]: InterviewData } = {
   },
 };
 
-
-
 const HomePage: React.FC = () => {
   const [selectedInterviewType, setSelectedInterviewType] =
     useState<string>("");
@@ -253,14 +196,75 @@ const HomePage: React.FC = () => {
   const [interviewerResponse, setInterviewerResponse] = useState<string>("");
 
   const API_URL = "https://api.openai.com/v1/chat/completions";
-  const API_KEY = "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";
+  const API_KEY = "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";
+
+  const generate = async (message: string) => {
+    try {
+      // Fetch the response from the OpenAI API with the signal from AbortController
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: message }],
+          stream: true,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      setInterviewerResponse(data.choices[0].message.content);
+      setUserAnswer("");
+
+      // Read the response as a stream of data
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      setInterviewerResponse("");
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        // Massage and parse the chunk of data
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\\n");
+        const parsedLines = lines
+          .map((line) => line.replace(/^data: /, "").trim()) // Remove the "data: " prefix
+          .filter((line) => line !== "" && line !== "[DONE]") // Remove empty lines and "[DONE]"
+          .map((line) => JSON.parse(line)); // Parse the JSON string
+
+        for (const parsedLine of parsedLines) {
+          const { choices } = parsedLine;
+          const { delta } = choices[0];
+          const { content } = delta;
+          // Update the UI with the new content
+          if (content) {
+            setInterviewerResponse(interviewerResponse + content);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setInterviewerResponse("Error occurred while generating.");
+    }
+  };
 
   const handleStartInterview = async () => {
     if (!selectedInterviewType) return;
 
-    const prompt = `I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of ${ courseData[selectedInterviewType].job_title }.
+    const prompt = `I want you to act as an interviewer. I will be the candidate and you will ask me the interview questions for the position of ${
+      courseData[selectedInterviewType].job_title
+    }.
         
-    I want you to only reply as the interviewer. Do not write all the conservation at once. I want you to only do the technical interview with me on coding ( Topics : ${ courseData[selectedInterviewType].topics.join(", ") }) and data structures and algorithms ( Topics : Arrays, Strings, Stack, Queue, linked list ). Ask me the questions and wait for my answers. Start the interview now. Ask one question at a time, if I am not able to answer satisfactorily, give me feedback in this framework:
+    I want you to only reply as the interviewer. Do not write all the conservation at once. I want you to only do the technical interview with me on coding ( Topics : ${courseData[
+      selectedInterviewType
+    ].topics.join(
+      ", "
+    )}) and data structures and algorithms ( Topics : Arrays, Strings, Stack, Queue, linked list ). Ask me the questions and wait for my answers. Start the interview now and Ask only one question at a time, if I am not able to answer satisfactorily, give me feedback in this framework:
     
     ####
     If it is a Data Structures and Algorithms or a coding technical question then
@@ -289,78 +293,21 @@ const HomePage: React.FC = () => {
     4. Hiring criteria : Options are Reject, Waitlist, Hire and Strong Hire
     5. Code Quality
     Feedback for Subject Matter Expertise, Communication skills, Problem Solving skills should contain ratings on my interview responses from 0 - 10`;
-    
-    try {
-      // Fetch the response from the OpenAI API with the signal from AbortController
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: prompt }],
-        }),
-      });
-  
-      const data = await response.json();
-      console.log(data);
-      setInterviewerResponse(data.choices[0].message.content)
-    } catch (error) {
-      console.error("Error:", error);
-      setInterviewerResponse("Error occurred while generating.");
-    }
+
+    generate(prompt);
   };
 
   const handleStopInterview = async () => {
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: "stop the interview" }],
-        }),
-      });
-  
-      const data = await response.json();
-      console.log(data);
-      
-      setInterviewerResponse(data.choices[0].message.content)
-    } catch (error) {
-      console.error("Error:", error);
-      setInterviewerResponse("Error occurred while generating.");
-    }
+    generate("stop the interview");
   };
 
   const handleAnswerSubmission = async () => {
-    if (userAnswer=="") return;
-    try {
-      // Fetch the response from the OpenAI API with the signal from AbortController
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: userAnswer }],
-        }),
-      });
-  
-      const data = await response.json();
-      console.log(data);
-      setInterviewerResponse(data.choices[0].message.content)
-      setUserAnswer("");
-    } catch (error) {
-      console.error("Error:", error);
-      setInterviewerResponse("Error occurred while generating.");
-    }
+    if (userAnswer == "") return;
+    generate(userAnswer);
+  };
+
+  const handleNextQuestion = async () => {
+    generate("next question");
   };
 
   return (
@@ -403,6 +350,12 @@ const HomePage: React.FC = () => {
           >
             Start Interview
           </button>
+          <button
+            onClick={handleStopInterview}
+            className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Stop Interview
+          </button>
         </div>
       </div>
 
@@ -440,10 +393,10 @@ const HomePage: React.FC = () => {
           Submit Answer
         </button>
         <button
-          onClick={handleStopInterview}
           className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleNextQuestion}
         >
-          Stop Interview
+          Next Question
         </button>
       </div>
     </div>
