@@ -195,7 +195,8 @@ const HomePage: React.FC = () => {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [interviewerResponse, setInterviewerResponse] = useState<string>("");
 
-  const baseServerURL = "http://localhost:8080";
+  // const baseServerURL = "http://localhost:8080";
+  const baseServerURL = "https://cheerful-cummerbund-moth.cyclic.cloud/";
 
   const generate = async (message: string) => {
     try {
