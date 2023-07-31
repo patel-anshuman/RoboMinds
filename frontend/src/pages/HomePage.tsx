@@ -195,32 +195,26 @@ const HomePage: React.FC = () => {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [interviewerResponse, setInterviewerResponse] = useState<string>("");
 
-  const API_URL = "https://api.openai.com/v1/chat/completions";
-  const API_KEY = "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";
+  const baseServerURL = "http://localhost:8080";
 
   const generate = async (message: string) => {
     try {
-      // Fetch the response from the OpenAI API with the signal from AbortController
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${baseServerURL}/robominds`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
         },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: message }]
-        }),
+        body: JSON.stringify({ content: message }),
       });
 
       const data = await response.json();
       console.log(data);
-      setInterviewerResponse(data.choices[0].message.content);
+      setInterviewerResponse(data.msg);
       setUserAnswer("");
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error:", error);
-      setInterviewerResponse("Error occurred while generating.");
+      setInterviewerResponse(error.msg);
     }
   };
 
